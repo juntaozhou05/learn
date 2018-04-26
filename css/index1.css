@@ -1,0 +1,99 @@
+/*居中*/
+#box1 {
+  width: 200px;
+  height: 200px;
+  margin: 100px auto;
+  position: relative;
+  border: 1px solid gray;
+}
+#box2 {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+#box3 {
+  width: 200px;
+  height: 200px;
+  margin: 100px auto;
+  position: relative;
+  border: 1px solid gray;
+  position: relative;
+}
+#box4 {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#box5 {
+  width: 100%;
+  height: 200px;
+}
+#box5 .left {
+  width: 90px;
+  height: 100px;
+  background-color: red;
+  float: left;
+}
+#box5 .right {
+  background-color: blue;
+  width: 100%;
+  height: 100px;
+  padding-left: 90px;
+  box-sizing: border-box;
+}
+#box5 .bottom {
+  height: 100px;
+  background-color: yellow;
+}
+
+#box6 {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+#box6 .left {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+#box6 .middle {
+  background-color: blue;
+  width: 100%;
+  height: 100px;
+  padding-right: 100px;
+  padding-left: 100px;
+  box-sizing: border-box;
+}
+#box6 .right {
+  background-color: yellow;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#box7 {
+  width: 100%;
+  list-style: none;
+  background: red;
+}
+#box7 li {
+  width: 300px;
+  height: 100px;
+  float: left;
+  margin: 10px;
+  background-color: blue;
+}
