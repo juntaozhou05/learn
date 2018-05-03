@@ -91,13 +91,38 @@ $("#adom .classa"); // 返回id为adom的DOM所包含的所有子节点中，第
 //3. 给一个element绑定一个针对event事件的响应，响应函数为listener
 function addEvent(element, event, listener) {
   // your implement
+  element.addEventListener(event, listener);
 }
 
-// 例如：
-function clicklistener(event) {}
-addEvent($("#doma"), "click", a);
+// test
+function testFn() {
+  console.log(123);
+}
+addEvent($("#doma"), "click", testFn);
 
 // 移除element对象对于event事件发生时执行listener的响应
 function removeEvent(element, event, listener) {
   // your implement
+  element.removeEventListener(event, listener);
 }
+
+//test
+removeEvent($("#doma"), "click", testFn);
+
+//4.事件代理
+// 先简单一些
+function delegateEvent(element, tag, eventName, listener) {
+  // your implement
+  element.addEventListener(eventName, listener);
+}
+function clickHandle(e, tag) {
+  if (e.target.tagName === "li".toUpperCase()) {
+    console.log(222);
+  }
+}
+
+$.delegate = delegateEvent;
+
+// 使用示例
+// 还是上面那段HTML，实现对list这个ul里面所有li的click事件进行响应
+$.delegate($("#list"), "li", "click", clickHandle);
