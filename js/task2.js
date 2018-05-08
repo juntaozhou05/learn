@@ -126,3 +126,37 @@ $.delegate = delegateEvent;
 // 使用示例
 // 还是上面那段HTML，实现对list这个ul里面所有li的click事件进行响应
 $.delegate($("#list"), "li", "click", clickHandle);
+
+//5.自己封装ajax
+function ajax(url, opt) {
+  opt = opt || {};
+  opt.method = opt.method.toUpperCase();
+  opt.async = opt.async || true;
+  opt.data = opt.data || {};
+  opt.success = opt.success || function() {};
+  var xmlHttp = XMLHttpRequest();
+  var params = [];
+  for (var key in opt.data) {
+    parms.push(key + "=" + opt.data[key]);
+  }
+  var postData = params.join("&");
+  if (opt.method.toUpperCase() == "POST") {
+    xmlHttp.open(opt.method, opt.url, opt.async);
+    xmlHttp.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded;charset=utf-8"
+    );
+    xmlHttp.send(postData);
+  } else if (opt.method.toUpperCase() == "GET") {
+    xmlHttp.open(opt.method, opt.url + "?" + postData, opt.async);
+    xmlHttp.send(null);
+  }
+  xmlHttp.onreadyStatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      opt.success(xmlHttp.responseText);
+    }
+  };
+}
+
+//6.小练习
+//1.
