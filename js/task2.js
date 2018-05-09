@@ -159,4 +159,54 @@ function ajax(url, opt) {
 }
 
 //6.小练习
-//1.
+//1.实现一个倒计时功能
+var btn = document.getElementById("submit");
+var textp = document.getElementById("textp");
+btn.onclick = function() {
+  var timevalue = document.querySelector("#inputTime").value;
+  var patt = /^(\d{1,4})(-)(\d{1,2})\2(\d{1,2})$/;
+  if (patt.test(timevalue) == false) {
+    //如果不正确
+    textp.innerHTML = "输入格式不满足YYYY-MM-DD";
+    return false;
+  } else {
+    textp.innerHTML = "这里显示倒计时";
+  }
+  //获取输入的年月日
+  var timearray = timevalue.split("-");
+  //ShowLeftTime(timearray[0],timearray[1],timearray[2]);
+  setInterval(function() {
+    ShowLeftTime(timearray[0], timearray[1], timearray[2]);
+  }, 1000);
+};
+function ShowLeftTime(year, month, date) {
+  //得出剩余时间
+  var now = new Date();
+  var endDate = new Date(year, month - 1, date);
+  var leftTime = endDate.getTime() - now.getTime();
+  var leftsecond = parseInt(leftTime / 1000);
+  var day = Math.floor(leftsecond / (60 * 60 * 24));
+  var hour = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600);
+  var minute = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60);
+  var second = Math.floor(
+    leftsecond - day * 60 * 60 * 24 - hour * 60 * 60 - minute * 60
+  );
+  //显示剩余时间
+  textp.innerHTML =
+    "距离" +
+    year +
+    "年" +
+    month +
+    "月" +
+    date +
+    "日" +
+    "还有" +
+    day +
+    "天" +
+    hour +
+    "小时" +
+    minute +
+    "分" +
+    second +
+    "秒";
+}
