@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel task2.html"
+    "start": "parcel autoPlay.html"
   },
   "keywords": [],
   "author": "",
