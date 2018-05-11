@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index2</title>
+    <style>
+        div,
+        ul,
+        li {
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        #cover {
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #main {
+            list-style: none;
+            width: 900px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #main li {
+            width: 300px;
+            height: 200px;
+            float: left;
+        }
+
+        #main li img {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cover">
+        <ul id="main">
+            <li>
+                <img src="./imgs/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="./imgs/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./imgs/3.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script src="./js/autoPlay.js"></script>
+
+</html>
