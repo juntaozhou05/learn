@@ -7,23 +7,79 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>todoList</title>
     <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
         ul {
             list-style: none;
+        }
+
+        header {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+            position: relative;
+        }
+
+        #list,
+        #detail {
+            display: none;
+        }
+
+        .back {
+            position: absolute;
+            left: 5px;
+            top: 0;
         }
     </style>
 </head>
 
 <body>
+    <header>
+        <span class="back">
+            < 返回</span>
+                <span class="title">to-do</span>
+    </header>
     <div id="main">
-        <ul id="lists">
-            <li id="task1">
+        <ul id="mainLists">
+            <li id="task1" value="1">
                 任务分类1
             </li>
-            <li id="task2">
+            <li id="task2" value="2">
                 任务分类2
             </li>
-            <li id="task3">
+            <li id="task3" value="3">
                 任务分类3
+            </li>
+        </ul>
+    </div>
+    <div id="list">
+        <ul id="listLists">
+            <li id="task1">
+                任务1
+            </li>
+            <li id="task2">
+                任务2
+            </li>
+            <li id="task3">
+                任务3
+            </li>
+        </ul>
+    </div>
+    <div id="detail">
+        <ul id="listLists">
+            <li id="task1">
+                任务3
+            </li>
+            <li id="task2">
+                2015-05-05
+            </li>
+            <li id="task3">
+                任务详情
             </li>
         </ul>
     </div>
