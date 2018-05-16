@@ -1,4 +1,4 @@
-document.getElementById("task1").onclick = function() {
+document.getElementById("class1").onclick = function() {
   if (this.getAttribute("value") == 1) {
     document.getElementById("list").style.display = "block";
     document.getElementsByClassName("back")[0].style.display = "block";
@@ -11,3 +11,5 @@ document.getElementsByClassName("back")[0].onclick = function() {
   document.getElementById("main").style.display = "block";
   this.style.display = "none";
 };
+
+document.getElementById("task1").onclick = function() {};
