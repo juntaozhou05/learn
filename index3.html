@@ -63,18 +63,43 @@
 <script>
     function getAllListItem() {
         // 返回页面中所有li标签
+        console.log(document.querySelectorAll("li"));
     }
 
     function findAllHtmlSpanInOneSection(sectionId) {
         // 返回某个section下所有span中内容为HTML的span标签
+        var li = document.querySelectorAll("li");
+        var result = [];
+        for (var i = 0; i < li.length; i++) {
+            if (li[i].html = "HTML") {
+                result.push(li[i]);
+            }
+        }
+        return result;
     }
 
     function findListItem(sectionId, spanCont) {
         // 返回某个section下，所有所包含span内容为spanCont的LI标签
+        var li = document.querySelectorAll("section>li>span");
+        var result = [];
+        for (var i = 0; i < li.length; i++) {
+            if (li[i].html = "spanCont") {
+                result.push(li[i]);
+            }
+        }
+        return result;
     }
 
     function getActiveLinkContent(sectionId) {
         // 返回某个section下，class为active的链接中包含的文字内容
+        var li = document.querySelectorAll("section.active");
+        var result = [];
+        for (var i = 0; i < li.length; i++) {
+            if (li[i].className != "") {
+                result.push(li[i]);
+            }
+        }
+        return result;
     }
 </script>
 
