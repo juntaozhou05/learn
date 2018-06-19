@@ -54,31 +54,90 @@
 // console.log(Object.prototype.toString.call({ a: 2 })); //[object Object]
 
 /*AOP*/
-Function.prototype.before = function(beforeFn) {
-  var that = this;
-  return function() {
-    beforeFn.apply(this, arguments);
-    return that.apply(this, arguments);
-  };
-};
-Function.prototype.after = function(afterFn) {
-  var that = this;
-  return function() {
-    var ret = that.apply(this, arguments);
-    afterFn.apply(this, arguments);
-    return ret;
-  };
-};
+// Function.prototype.before = function(beforeFn) {
+//   var that = this;
+//   return function() {
+//     beforeFn.apply(this, arguments);
+//     return that.apply(this, arguments);
+//   };
+// };
+// Function.prototype.after = function(afterFn) {
+//   var that = this;
+//   return function() {
+//     var ret = that.apply(this, arguments);
+//     afterFn.apply(this, arguments);
+//     return ret;
+//   };
+// };
 
-var func = function() {
-  console.log(2);
-};
-func = func
-  .before(function() {
-    console.log(1);
-  })
-  .after(function() {
-    console.log(3);
-  });
+// var func = function() {
+//   console.log(2);
+// };
+// func = func
+//   .before(function() {
+//     console.log(1);
+//   })
+//   .after(function() {
+//     console.log(3);
+//   });
 
-func();
+// func();
+
+/*currying*/
+// let mothlycost = 0;
+// var cost = function(money) {
+//   return (mothlycost += money);
+// };
+// cost(100);
+// cost(200);
+// console.log(cost(300));
+
+// var currying = function(fn) {
+//   var args = [];
+//   return function() {
+//     if (arguments.length === 0) {
+//       return fn.apply(this, args);
+//     } else {
+//       [].push.apply(args, arguments);
+//       return arguments.callee;
+//     }
+//   };
+// };
+// var cost = (function() {
+//   var money = 0;
+//   return function() {
+//     for (var i = 0, l = arguments.length; i < l; i++) {
+//       money += arguments[i];
+//     }
+//     return money;
+//   };
+// })();
+// var cost = currying(cost); // 转化成currying 函数
+// cost(100); // 未真正求值
+// cost(200); // 未真正求值
+// cost(300); // 未真正求值
+// console.log(cost()); // 求值并输出：600
+
+/*uncurrying*/
+// Function.prototype.uncurring = function() {
+//   let self = this;
+//   return function() {
+//     let obj = Array.prototype.shift.call(arguments);
+//     return self.apply(obj, arguments);
+//   };
+// };
+
+// var push = Array.prototype.push.uncurring();
+// (function() {
+//   push(arguments, 4);
+//   console.log(arguments);
+// })(1, 2, 3);
+//另一种实现uncurrying
+// Function.prototype.uncurrying = function() {
+//   var self = this;
+//   return function() {
+//     return Function.prototype.call.apply(self, arguments);
+//   };
+// };
+
+/*函数节流*/
