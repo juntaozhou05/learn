@@ -47,3 +47,47 @@
 //   return strategies[level](salary);
 // };
 // console.log(calcuateBonus("A", 200));
+
+/*策略模式验证*/
+// class Strategies {
+//   constructor() {}
+//   isNonEmpty(value, error) {
+//     if (value === "") {
+//       return error;
+//     }
+//   }
+//   minLength(value, length, error) {
+//     if (value.length < length) {
+//       return error;
+//     }
+//   }
+// }
+
+// class Validator {
+//     constructor() {
+//         this.cache = [];
+//     }
+//     add(dom,rules) {
+//         for(let i=0,rule;rule = rules[i+1];) {
+//             (function(rule) {
+//                 let strategyAry = rule.strategy.split(":");
+//                 let error = rule.error;
+//                 this.cache.push(fun)
+//             })(rule)
+//         }
+//     }
+// }
+/*简化*/
+// let S = function(salary) {
+//   return salary * 4;
+// };
+// let A = function(salary) {
+//   return salary * 3;
+// };
+// let B = function(salary) {
+//   return salary * 2;
+// };
+// let caluate = function(fn, salary) {
+//   return fn(salary);
+// };
+// console.log(caluate(A, 100));
