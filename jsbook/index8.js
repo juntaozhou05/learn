@@ -52,41 +52,106 @@
 // salesOffices.trigger("squareMeter110", 3000000); // 发布110 平方米房子的价格
 
 /*通用发布-订阅*/
-var event = {
-  clientList: [],
-  listen: function(key, fn) {
-    if (!this.clientList[key]) {
-      this.clientList[key] = [];
-    }
-    this.clientList[key].push(fn);
-  },
-  trigger: function() {
-    var key = [].shift.call(arguments),
-      fns = this.clientList[key];
-    if (!fns || fns.length === 0) {
-      return false;
-    }
-    for (let i = 0, fn; (fn = fns[i++]); ) {
-      fn.apply(this, arguments);
-    }
-  }
-};
-//再定义一个installEvent 函数，
-//这个函数可以给所有的对象都动态安装发布—订阅功能
-var installEvent = function(obj) {
-  for (var i in event) {
-    obj[i] = event[i];
-  }
-};
-var salesOffices = {};
-installEvent(salesOffices);
-salesOffices.listen("squareMeter88", function(price) {
-  // 小明订阅消息
-  console.log("价格= " + price);
-});
-salesOffices.listen("squareMeter100", function(price) {
-  // 小红订阅消息
-  console.log("价格= " + price);
-});
-salesOffices.trigger("squareMeter88", 2000000); // 输出：2000000
-salesOffices.trigger("squareMeter100", 3000000); // 输出：3000000
+// var event = {
+//   clientList: [],
+//   listen: function(key, fn) {
+//     if (!this.clientList[key]) {
+//       this.clientList[key] = [];
+//     }
+//     this.clientList[key].push(fn);
+//   },
+//   trigger: function() {
+//     var key = [].shift.call(arguments),
+//       fns = this.clientList[key];
+//     if (!fns || fns.length === 0) {
+//       return false;
+//     }
+//     for (let i = 0, fn; (fn = fns[i++]); ) {
+//       fn.apply(this, arguments);
+//     }
+//   }
+// };
+// //再定义一个installEvent 函数，
+// //这个函数可以给所有的对象都动态安装发布—订阅功能
+// var installEvent = function(obj) {
+//   for (var i in event) {
+//     obj[i] = event[i];
+//   }
+// };
+// var salesOffices = {};
+// installEvent(salesOffices);
+// salesOffices.listen("squareMeter88", function(price) {
+//   // 小明订阅消息
+//   console.log("价格= " + price);
+// });
+// salesOffices.listen("squareMeter100", function(price) {
+//   // 小红订阅消息
+//   console.log("价格= " + price);
+// });
+// salesOffices.trigger("squareMeter88", 2000000); // 输出：2000000
+// salesOffices.trigger("squareMeter100", 3000000); // 输出：3000000
+// //取消订阅
+// event.remove = function(key, fn) {
+//   var fns = this.clientList[key];
+//   if (!fns) {
+//     return false;
+//   }
+//   if (!fn) {
+//     fns && (fns.length = 0);
+//   } else {
+//     for (var l = fns.length - 1; l >= 0; l--) {
+//       var _fn = fns[l];
+//       if (_fn === fn) {
+//         fns.splice(l, 1);
+//       }
+//     }
+//   }
+// };
+
+//全局Event
+// var Event = (function() {
+//   var clientList = {};
+//   var listen;
+//   var trigger;
+//   var remove;
+//   listen = function(key, fn) {
+//     if (!clientList[key]) {
+//       clientList[key] = [];
+//     }
+//     clientList[key].push(fn);
+//   };
+//   trigger = function() {
+//     var key = [].shift.call(arguments);
+//     var fns = clientList[key];
+//     if (!fns || fns.length === 0) {
+//       return false;
+//     }
+//     for (var i = 0, fn; (fn = fns[i++]); ) {
+//       fn.apply(this, arguments);
+//     }
+//   };
+//   remove = function(key, fn) {
+//     var fns = clientList[key];
+//     if (!fns) {
+//       return false;
+//     }
+//     if (!fn) {
+//       fns && (fns.length = 0);
+//     } else {
+//       for (var l = fns.length - 1; l >= 0; l--) {
+//         if (fns[l] === fn) {
+//           fns.splice(l, 1);
+//         }
+//       }
+//     }
+//   };
+//   return {
+//     listen,
+//     trigger,
+//     remove
+//   };
+// })();
+// Event.listen("88", function(price) {
+//   console.log("价格=" + price);
+// });
+// Event.trigger("88", 200);
