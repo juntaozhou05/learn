@@ -90,3 +90,10 @@
 //   Array.prototype.push.call(arguments, 3);
 //   console.log(arguments);
 // })(1, 2);
+/*es6 bind*/
+// Function.prototype.bind = function (context, ...rest) {
+//     const that = this;
+//     return function (...args) {
+//         return that.apply(context, rest.concat(...args))
+//     }
+// }
