@@ -76,15 +76,15 @@
 // chainOrder500.passRequest(1, false, 0); // 输出：手机库存不足
 
 /*简化版*/
-Function.prototype.after = function(fn) {
-  const self = this;
-  return function() {
-    const ret = self.apply(this, arguments);
-    if (ret === "next") {
-      return fn.apply(this, arguments);
-    }
-  };
-};
+// Function.prototype.after = function(fn) {
+//   const self = this;
+//   return function() {
+//     const ret = self.apply(this, arguments);
+//     if (ret === "next") {
+//       return fn.apply(this, arguments);
+//     }
+//   };
+// };
 
-const order = order500.after(order200).after(orderNormal);
-order(1, true, 500);
+// const order = order500.after(order200).after(orderNormal);
+// order(1, true, 500);
