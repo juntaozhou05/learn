@@ -35,3 +35,80 @@ Block Formatting Contexts（BFC）
 
 1. 只要有公用样式，那么选择器最右边的那个类型选择器一定是相同的，如此公共样式就很自然的都集中到一个分支上，这个时候我们完全可以将其他不匹配的路径全部去掉而不用担心会漏掉某些个公用样式了。
 2. 从右往左的匹配规则就是为了避免对所有元素进行遍历
+
+### 四.css 优先级不能通过数量叠加超过比自己强大的优先级
+
+### 五.关于 display：none；的图片加载
+
+1. 如果元素有{display: none;}的样式的话，标签上的图片会被请求加载，但是不会被渲染
+
+2. 如果父元素有{display: none;}的样式的话，子元素在样式表中的背景图片既不会渲染也不会加载，但是标签上的图片会被加载不会被渲染
+
+```
+<style>
+.img-container {
+background-image: url(../imgs/icon1.png);
+}
+</style>
+
+<div style="display:none">
+<div class="img-container"></div>
+<img src="../imgs/icon2.png">
+</div>
+```
+
+3. 伪类背景图片只在触发伪类时候才会请求加载（因此建议请求雪碧图---即一堆小图汇总到一张大图上，这样不会有 UI 跳跃感）
+
+4. 已经请求过的相同图片不会重复请求
+
+5. 不存在的元素，即时样式表里有写，也不会请求加载
+
+### 六.如何产生不占空间的边框
+
+1. box-shadow
+2. outline
+
+### 七.css 导入方式
+
+link 页面被加载的时，link 会同时被加载，而@import 引用的 CSS 会等到页面被加载完再加载,且 link 是 XHTML 标签，无兼容问题; link 支持动态 js 去控制 DOM 节点去改变样式，而@import 不支持，
+
+### 八.垂直水平居中
+
+1.
+
+```
+margin: auto;
+position:absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+```
+
+2.
+
+```
+margin: auto;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+-webkit-transform: translate(-50%, -50%);
+```
+
+3.
+
+```
+//父元素
+display: flex;
+align-items: center; /*垂直居中*/
+justify-content: center; /*水平居中*/
+
+```
+
+### 九.伪元素
+
+1. 想让插入的内容出现在其它内容前，使用::before，之后则使用::after； 在代码顺序上，::after 生成的内容也比::before 生成的内容靠后。
+   如果按堆栈视角，::after 生成的内容会在::before 生成的内容之上;
+
+2. 伪元素默认未内联元素
