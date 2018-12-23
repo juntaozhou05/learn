@@ -1,4 +1,4 @@
-### 一.使用箭头函数要避免的情况
+﻿### 一.使用箭头函数要避免的情况
 
 **1. 使用箭头函数定义对象的方法**
 
@@ -75,3 +75,5 @@ Promise.all 里的任务列表[asyncTask(1),asyncTask(2),asyncTask(3)],我们是
 [asyncTask(1),asyncTask(2),asyncTask(3)]一一对应起来  
 **2.promise.race**  
 语法和 all()一样，但是返回值有所不同，race 根据传入的多个 Promise 实例，只要有一个实例 resolve 或者 reject，就只返回该结果，其他实例不再执行。
+
+### 四:冻结对象
