@@ -1,5 +1,7 @@
-### 一：Js：模拟实现call函数
-1. call改变了this的指向，指向到foo；调用了bar函数
+### 一：Js：模拟实现 call 函数
+
+1. call 改变了 this 的指向，指向到 foo；调用了 bar 函数
+
 ```
 Function.Prototype.call2 = function(context){
   //获取调用call2的函数，用this
@@ -19,7 +21,9 @@ function bar() {
 
 bar.call2(foo); // 1
 ```
+
 2. call 函数还能给定参数执行函数。
+
 ```
 // 第二版
 Function.prototype.call2 = function(context) {
@@ -43,13 +47,14 @@ function bar(name, age) {
     console.log(this.value);
 }
 
-bar.call2(foo, 'Cherry', 18); 
+bar.call2(foo, 'Cherry', 18);
 // Cherry
 // 18
 // 1
 ```
-3. 1.this 参数可以传 null，当为 null 的时候，视为指向 window
-2.函数是可以有返回值的！
+
+3. 1.this 参数可以传 null，当为 null 的时候，视为指向 window 2.函数是可以有返回值的！
+
 ```
 // 第三版
 Function.prototype.call2 = function (context) {
@@ -93,11 +98,14 @@ console.log(bar.call2(obj, 'Cherry', 18));
 //    age: 18
 // }
 ```
-### 二：实现indexOf方法
-1. indexOf()方法是ES5中出现的数组方法，它有两个参数
-array.indexOf(value,start)
-第一个参数指定要在数组查找的值，第二个可选参数指定开始查找的数组下标。如果省略，则为0。如果数组中存在匹配的值，就返回第一次匹配的数组下标，如果不存在匹配的值，则返回-1。
-示例：['a','b','c'].indexOf('a',1)  //返回-1
+
+### 二：实现 indexOf 方法
+
+1. indexOf()方法是 ES5 中出现的数组方法，它有两个参数
+   array.indexOf(value,start)
+   第一个参数指定要在数组查找的值，第二个可选参数指定开始查找的数组下标。如果省略，则为 0。如果数组中存在匹配的值，就返回第一次匹配的数组下标，如果不存在匹配的值，则返回-1。
+   示例：['a','b','c'].indexOf('a',1) //返回-1
+
 ```
 var indexof = function(array,value,start){
    if(array == null) return -1;
@@ -123,5 +131,7 @@ var indexof = function(array,value,start){
 //测试
 console.log(indexof([2,4,1,8,5],1,0));//输出2
 ```
+
 ### 三：设计模式（节流模式-----图片懒加载）
+
 https://www.cnblogs.com/hsp-blog/p/5897393.html
