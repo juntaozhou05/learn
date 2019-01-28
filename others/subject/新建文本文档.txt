@@ -2,6 +2,10 @@ css：
 1.line-height1.5和150%区别
 2.flex:1 简写  什么意思
 3.css解析顺序
+4.垂直居中
+5.float和position absolute
+6.position fixed div宽度
+7.
 js：
 1.如何对多维数组平铺
 2.如何遍历对象属性 会不会遍历继承的属性  删除对象属性
@@ -9,4 +13,6 @@ js：
 4.object.assgin()创建的元素
 5.基本包装对象  为什么string有length方法
 6.判断数据类型
-7.
+7.for...in和for...of
+8.跳出foreach  for  for...in 循环
+9.
