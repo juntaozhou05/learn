@@ -15,4 +15,4 @@ js：
 6.判断数据类型
 7.for...in和for...of
 8.跳出foreach  for  for...in 循环
-9.
+9.判断一个类是否继承于另一个类 
