@@ -141,4 +141,73 @@ let mySearch:SearchFunc=function(src,sub){
 注意：
 函数的参数会逐个进行检查，要求对应接口的位置上的参数类型是兼容的，无需名称一致。
 
-7.
+7. 可索引类型
+
+与使用接口描述函数类型差不多，我们也可以描述那些能够“通过索引得到”的类型，比如 a`[10]`或 ageMap`["daniel"]`。可索引类型具有一个 索引签名 ，它描述了对象索引的类型，还有相应的索引返回值类型。
+
+索引签名共有两种形式：字符串和数字。
+
+数字索引签名：
+
+```
+interface NN {[index: number]: number;}
+let nn: NN = [1, 2];
+
+interface NS {[index: number]: string;}
+let ns: NS = ["1", "2"];
+```
+
+上面例子里，我们定义了 NN 接口和 NS 接口，它们具有索引签名。 这个索引签名表示了当用 number 去索引 NN 或 NS 接口 时会得到 number 类型或 string 的返回值。
+
+字符串索引签名：
+
+字符串索引签名能够很好的描述 dictionary 模式，并且它们也会确保所有属性与其返回值类型相匹配。
+
+```
+interface SS {[index:string]:string}
+let ss: SS = {"A":"a", "B":"b"};
+
+interface SN {[index: string]: number;}
+let sn: SN = {"A":1, "B":2};
+```
+
+你可以将索引签名设置为只读，这样就防止了给索引赋值：
+
+```
+
+interface ReadonlyStringArray {
+    readonly [index: number]: string;
+}
+let myArray: ReadonlyStringArray = ["Alice", "Bob"];
+myArray[2] = "Mallory"; // error!
+```
+
+索引的返回值可以不只一个，但是必须是同一个类型。
+
+```
+interface NN {
+    [index: number]: number;
+    length:number;
+    name: string       // 错误，`name`的类型与索引类型返回值的类型不匹配
+}
+let nn: NN = [1, 2];
+```
+
+注意： 如果有多个返回值，那么数字索引的返回值必须是字符串索引返回值类型的子类型。
+对于上述的解释，TS 原话是这样的：
+
+8. 类类型
+
+与 C#或 Java 里接口的基本作用一样，TS 也能够用它来明确的强制一个类去符合某种契约。
+
+```
+
+interface ClockInterface {
+    currentTime: Date;
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    constructor(h: number, m: number) { }
+}
+```
