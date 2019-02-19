@@ -1,3 +1,38 @@
+### 一：简易 promise 实现
+
+```
+function easyPromise (fn) {
+    this.then = cb => this.cb = cb
+    this.resolve = data => this.cb(data)
+    fn(this.resolve)
+}
+
+```
+
+上面的代码就实现了一个简单的,实现 then 回调的「promise」,这里为了缩短代码量,用了 es6 的简写,实际展开应该是这样
+
+```
+function easyPromise (fn) {
+    var that = this
+
+    // 第一步,定义 then()
+    this.then = function (cb) {
+        //先将 then() 括号里面的参数(回调函数)保存起来
+        that.cb = cb
+    }
+
+    // 定义一个 resolve
+    this.resolve = function(data) {
+        that.cb(data)
+    }
+
+    // 将 resolve 作为回调函数,传给fn
+    fn(this.resolve)
+}
+```
+
+### 二：具体实现
+
 1. 问题：
 
 ```
