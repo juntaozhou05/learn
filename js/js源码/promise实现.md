@@ -45,5 +45,159 @@ function MyPromise(fn) {
 fn 接受的两个函数需要单独定义：
 
 ```
+function Promise(fn) {
+  function successNotify() {}
 
+  function errorNotify() {}
+
+  fn.call(undefined, successNotify, errorNotify); // fn接受两个函数作为参数
+
+  return {
+    then: function(successFn, errorFn) {
+      return undefined;
+    }
+  }
+}
+```
+
+为了让 fn 的处理函数能够正确反映 Promise 的状态，需要添加一个状态变量：
+
+```
+function Promise(fn) {
+  let status = 'pending';
+
+  function successNotify() {
+    status = 'resolved';
+  }
+
+  function errorNotify() {
+    status = 'rejected';
+  }
+
+  fn.call(undefined, successNotify, errorNotify); // fn接受两个函数作为参数
+
+  return {
+    then: function(successFn, errorFn) {
+      return undefined;
+    }
+  }
+}
+```
+
+接下来我们要处理 then 传进来的函数，如果成功你那个解决了，就要处理 then 传进来的成功函数，否则要处理失败函数，因此用两个单独的队列放传进来的函数：
+
+```
+function Promise(fn) {
+
+  let status = 'pending';
+
+  let successArray = [];
+  let errorArray = [];
+
+  function successNotify() {
+    status = 'resolved';
+  }
+
+  function errorNotify() {
+    status = 'rejected';
+  }
+
+  fn.call(undefined, successNotify, errorNotify); //fn接受两个函数作为参数
+
+  return {
+    then: function(successFn, errorFn) {
+      successArray.push(successFn);
+      errorArray.push(errorFn);
+      return undefined; // 如果不写默认return undefined，这里我们只做一次then，如果要用then链，可能需要递归调用
+    }
+  }
+}
+```
+
+只有在处理好之后才会处理 then 里面传递的内容，新增一个对 then 的处理函数：
+
+```
+function Promise(fn) {
+  let status = 'pending';
+
+  let successArray = [];
+  let errorArray = [];
+
+  function successNotify() {
+    status = 'resolved';
+    handleThen.apply(undefined, arguments);
+  }
+
+  function errorNotify() {
+    status = 'rejected';
+    handleThen.apply(undefined, arguments);
+  }
+
+  function handleThen() {
+    if (status === 'resolved') {
+      for (let i = 0; i < successArray.length; i++) {
+        successArray[i].apply(undefined, arguments);
+      }
+    } else if (status === 'rejected') {
+      for (let i = 0; i < errorArray.length; i++) {
+        errorArray[i].apply(undefined, arguments);
+      }
+    }
+  }
+
+  fn.call(undefined, successNotify, errorNotify); //fn接受两个函数作为参数
+
+  return {
+    then: function(successFn, errorFn) {
+      successArray.push(successFn);
+      errorArray.push(errorFn);
+      return undefined; // 如果不写默认return undefined，这里我们简化，只做一次then，如果要用then链，可能需要递归调用
+    }
+  }
+}
+```
+
+为了确保回调是异步执行的，用 setTimeout 裹一层：
+
+```
+function Promise(fn) {
+  let status = 'pending';
+
+  let successArray = [];
+  let errorArray = [];
+
+  function successNotify() {
+    status = 'resolved';
+    handleThen.apply(undefined, arguments);
+  }
+
+  function errorNotify() {
+    status = 'rejected';
+    handleThen.apply(undefined, arguments);
+  }
+
+  function handleThen() {
+    setTimeout(() => {
+      if (status === 'resolved') {
+        for (let i = 0; i < successArray.length; i++) {
+          successArray[i].apply(undefined, arguments);
+        }
+      } else if (status === 'rejected') {
+        for (let i = 0; i < errorArray.length; i++) {
+          errorArray[i].apply(undefined, arguments);
+        }
+      }
+    });
+  }
+
+  fn.call(undefined, successNotify, errorNotify); //fn接受两个函数作为参数
+
+  return {
+    then: function(successFn, errorFn) {
+      successArray.push(successFn);
+      errorArray.push(errorFn);
+      return undefined; // 如果不写默认return undefined，这里我们简化，只做一次then，如果要用then链，可能需要递归调用
+    }
+  }
+}
 ```
