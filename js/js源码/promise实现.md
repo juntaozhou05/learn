@@ -1,4 +1,4 @@
-### 一：简易 promise 实现
+### 一：简易三行代码实现 promise
 
 ```
 function easyPromise (fn) {
@@ -31,7 +31,19 @@ function easyPromise (fn) {
 }
 ```
 
-### 二：具体实现
+### 二：十行实现 promise
+
+```
+var MyPromise = function(doSomething) {
+  this.doSomething = doSomething;
+};
+MyPromise.prototype.then = function(resovle, reject) {
+  this.doSomething(resovle, reject);
+  return this;
+};
+```
+
+### 三：具体实现
 
 1. 问题：
 
