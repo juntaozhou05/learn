@@ -16,3 +16,11 @@ js：
 7.for...in和for...of
 8.跳出foreach  for  for...in 循环
 9.判断一个类是否继承于另一个类 
+10.setTimeout和setInterval
+
+浏览器
+1.http的状态码
+2.
+
+
+https://note.youdao.com/ynoteshare1/index.html?id=e3aaf1314d7d1edd93c37943c73f455a&type=note#/
