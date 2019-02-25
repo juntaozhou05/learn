@@ -81,3 +81,102 @@ Number.isInteger('3') // false
 Number.isInteger(true) // false
 Number.isInteger([]) // false
 ```
+
+### 二：判断回文
+
+1. 数组 reverse 方法(该方法会改变原数组)
+
+```
+var str1 = "abcba";
+function hui(str) {
+    let arr = str.split("");
+    arr.reverse;
+    return str === arr.join("");
+}
+console.log(hui(str1));
+```
+
+2. 遍历方法
+
+```
+function hui(str) {
+    let temp = "";
+    for (let i = str.length - 1; i >= 0; i--) {
+        temp += str[i];
+    }
+    return temp === str;
+}
+```
+
+### 三:高阶函数
+
+console.log(sum(2, 3)); // Outputs 5
+console.log(sum(2)(3)); // Outputs 5
+
+```
+function sum(...args) {
+    console.log(args);
+    if (args.length === 2) {
+        return args[0] + args[1];
+    } else {
+        return function(...args2) {
+        return args[0] + args2[0];
+        };
+    }
+}
+```
+
+```
+function sum(x) {
+  if (arguments.length == 2) {
+    return arguments[0] + arguments[1];
+  } else {
+    return function(y) { return x + y; };
+  }
+}
+```
+
+### 四：输出结果
+
+```
+console.log(1 + "2" + "2"); //"122"
+console.log(1 + +"2" + "2"); //"32"
+console.log(1 + -"1" + "2"); //"02"
+console.log(+"1" + "1" + "2"); //"112"
+console.log("A" - "B" + "2"); //"NaN2"
+console.log("A" - "B" + 2); //
+```
+
+### 五：递归导致堆栈溢出处理
+
+1. 尾递归
+
+```
+//普通递归
+function factorial(n) {
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
+}
+
+factorial(5) // 120
+//尾递归
+function factorial(n, total) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5, 1) // 120
+```
+
+2. setTimeout
+
+```
+function foo() {
+    setTimeout(foo, 0);
+}
+foo()
+```
+
+然后执行 settimeout 函数这个时候虽然它又继续调用自己，但是这里可以理解多线程操作了，只是开启另一个线程来启动 foo，而当前线程仍然继续执行，当当前线程的 foo 执行完成后，自然就出栈了，每一次的 foo 执行都是这个过程，所以栈里不会容量超标的。
+
+![tupian](https://mystore01.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87/1.png)
