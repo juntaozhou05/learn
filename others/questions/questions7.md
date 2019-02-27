@@ -224,3 +224,34 @@ console.log(a[b]);
 ```
 
 原因如下：设置对象属性时，javascript 将隐式地将参数值字符串化。在这种情况下，因为 B 和 C 都是对象，所以它们都将被转换为`“[对象对象]”`。因此，a[b]和 a[c]都相当于一个`[“[对象对象]”]`，可以互换使用。因此，设置或引用 A[C]与设置或引用 A[B]完全相同。
+
+### 九：
+
+```
+var length = 10;
+function fn() {
+	console.log(this.length);
+}
+
+var obj = {
+  length: 5,
+  method: function(fn) {
+    fn();
+    arguments[0]();
+  }
+};
+
+obj.method(fn, 1);
+```
+
+首先，当 fn 作为参数传递给函数方法时，函数 fn 的作用域（this）是 window。var length=10；在窗口级别声明。它也可以作为 window.length 或 length 或 this.length（当 this==window 时）访问。
+
+方法绑定到对象 obj，并使用参数 fn 和 1 调用 obj.method。尽管方法只接受一个参数，但在调用时它传递了两个参数；第一个参数是函数回调，另一个参数只是一个数字。
+
+当在方法内部调用 fn（）时（该方法在全局级别作为参数传递函数），this.length 将可以访问 var length=10（全局声明），而不是对象 obj 中定义的 length=5。
+
+现在，我们知道可以使用 arguments[]数组访问 javascript 函数中的任意数量的参数。
+
+因此，参数[0]（）只是调用 fn（）。在 fn now 中，此函数的作用域成为 arguments 数组，记录 arguments[]的长度将返回 2。
+
+因此，输出将如上所述。
