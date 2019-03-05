@@ -51,3 +51,7 @@ for i in range(10):
 else:
     print 'not found it ...'
 ```
+
+### 六：字符串方法
+
+1. isupper 是一个字符串方法，如果字符串仅含有大写字母，则返回 True。
