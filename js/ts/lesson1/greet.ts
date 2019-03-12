@@ -13,7 +13,7 @@ function greeter(person: Person) {
 }
 
 let user = { firstName: "first", lastName: "last" };
-document.body.innerHTML = greeter(user);
+console.log(greeter(user));
 
 let student = new Student("Jane", "m");
 console.log(student);
